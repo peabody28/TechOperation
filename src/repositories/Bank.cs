@@ -1,0 +1,31 @@
+﻿using entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+namespace repositories
+{
+    public class Bank : DbContext
+    {
+        private IConfiguration Configuration { get; set; }
+
+        public Bank(IConfiguration config)
+        {
+            Configuration = config;
+        }
+
+        public DbSet<UserEntity> User { get; set; }
+        public DbSet<RoleEntity> Role { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var connString = Configuration.GetConnectionString("Bank");
+            optionsBuilder.UseSqlServer(connString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserEntity>()
+                .HasOne(c => c.Role as RoleEntity);
+        }
+    }
+}

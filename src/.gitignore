@@ -1,0 +1,6 @@
+.vs/
+*apphost
+*/bin
+*/obj
+*/*.user
+/src/TechOperation/Properties/PublishProfiles
