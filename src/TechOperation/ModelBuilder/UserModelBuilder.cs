@@ -1,7 +1,7 @@
 ﻿using entities.Interfaces;
-using TechOperations.Models.User;
+using TechOperation.Models.User;
 
-namespace TechOperations.ModelBuilder
+namespace TechOperation.ModelBuilder
 {
     public class UserModelBuilder
     {
@@ -9,7 +9,14 @@ namespace TechOperations.ModelBuilder
         {
             if (user == null)
                 return null;
-            return new UserModel { Name = user.Name, RoleCode = user.Role.Code };
+
+            return new UserModel
+            {
+                Name = user.Name,
+                RoleCode = user.Role.Code,
+                TelegramId = user.TelegramId.Value,
+                PhoneNumber = user.PhoneNumber
+            };
         }
     }
 }

@@ -6,7 +6,7 @@ namespace entities.Interfaces
     {
         Guid Id { get; set; }
 
-        int TelegramId { get; set; }
+        int? TelegramId { get; set; }
 
         string Name { get; set; }
 

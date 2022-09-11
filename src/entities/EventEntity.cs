@@ -1,25 +1,19 @@
 ﻿using entities.Interfaces;
-using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace entities
 {
-    public class UserEntity : IUser
+    public class EventEntity : IEvent
     {
         public Guid Id { get; set; }
 
-        public int? TelegramId { get; set; }
-
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [ForeignKey("Role")]
         public Guid RoleFk { get; set; }
         public IRole Role { get; set; }
 
-        public string PhoneNumber { get; set; }
-
-        IRole IUser.Role
+        IRole IEvent.Role
         {
             get => Role;
             set

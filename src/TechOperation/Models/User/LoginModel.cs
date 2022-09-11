@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TechOperations.Models.User
+namespace TechOperation.Models.User
 {
     public class LoginModel
     {

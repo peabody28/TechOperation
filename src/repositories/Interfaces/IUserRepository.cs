@@ -1,10 +1,11 @@
 ﻿using entities.Interfaces;
-using System.Collections.Generic;
 
 namespace repositories.Interfaces
 {
     public interface IUserRepository
     {
+        IUser Create(IRole role, int telegramId, string name, string phoneNumber);
+
         IUser Object(string name);
 
         IUser ObjectByPhone(string phoneNumber);

@@ -11,16 +11,18 @@ public class Program
         //Add services to the container.
 
         var builder = WebApplication.CreateBuilder(args);
-
         builder.Services.AddControllers();
+
 
         builder.Services.AddScoped<Bank, Bank>();
 
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+        builder.Services.AddScoped<IEventRepository, EventRepository>();
 
         builder.Services.AddScoped<IUser, UserEntity>();
         builder.Services.AddScoped<IRole, RoleEntity>();
+        builder.Services.AddScoped<IEvent, EventEntity>();
 
         builder.Services.AddMvc(opt =>
         {
@@ -33,10 +35,19 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseDeveloperExceptionPage();
         // Configure the HTTP request pipeline.
         app.UseRouting();
 
         app.UseAuthorization();
+
+        app.UseCors(builder =>
+        {
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        });
 
         app.UseEndpoints(endpoints =>
         {

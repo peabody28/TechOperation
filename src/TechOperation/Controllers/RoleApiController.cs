@@ -1,9 +1,9 @@
 ﻿using core;
 using Microsoft.AspNetCore.Mvc;
 using repositories.Interfaces;
-using TechOperations.Models.Role;
+using TechOperation.Models.Role;
 
-namespace TechOperations.Controllers
+namespace TechOperation.Controllers
 {
     public class RoleApiController : BaseApiController
     {

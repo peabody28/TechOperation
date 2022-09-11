@@ -30,9 +30,31 @@ CREATE TABLE [dbo].[User](
 END
 GO
 
-
-ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Role] FOREIGN KEY([RoleFk]) REFERENCES [dbo].[Role] ([Id])
+IF (OBJECT_ID('dbo.FK_User_Role', 'F') IS NULL)
+BEGIN
+    ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Role] FOREIGN KEY([RoleFk]) REFERENCES [dbo].[Role] ([Id])
+END
 GO
 
 ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Role]
+GO
+
+/* Event */
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE [object_id] = object_id('Event'))
+BEGIN
+CREATE TABLE [dbo].[Event](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Title] [text] NOT NULL,
+	[RoleFk] [uniqueidentifier] NULL,
+	PRIMARY KEY ([Id]))
+END
+GO
+
+IF (OBJECT_ID('dbo.FK_Event_Role', 'F') IS NULL)
+BEGIN
+    ALTER TABLE [dbo].[Event]  WITH CHECK ADD  CONSTRAINT [FK_Event_Role] FOREIGN KEY([RoleFk]) REFERENCES [dbo].[Role] ([Id])
+END
+GO
+
+ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Role]
 GO
