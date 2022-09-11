@@ -1,8 +1,8 @@
 ﻿using core;
+using Microsoft.AspNetCore.Mvc;
 using repositories.Interfaces;
 using TechOperation.ModelBuilder;
 using TechOperation.Models.Event;
-using System.Web.Http;
 
 namespace TechOperation.Controllers
 {
@@ -20,7 +20,7 @@ namespace TechOperation.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<EventModel> Events([FromUri]RequestEventsModel model)
+        public IEnumerable<EventModel> Events([FromQuery] RequestEventsModel model)
         {
             var events = EventRepository.Collection(model.RoleCode);
             return events.Select(ev => EventModelBuilder.Build(ev));

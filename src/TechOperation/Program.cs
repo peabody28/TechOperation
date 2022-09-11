@@ -1,3 +1,4 @@
+using core;
 using entities;
 using entities.Interfaces;
 using repositories;
@@ -13,7 +14,6 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllers();
 
-
         builder.Services.AddScoped<Bank, Bank>();
 
         builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -26,7 +26,7 @@ public class Program
 
         builder.Services.AddMvc(opt =>
         {
-            //opt.Filters.Add(typeof(ValidatorActionFilter));
+            opt.Filters.Add(typeof(ValidatorActionFilter));
             opt.EnableEndpointRouting = false;
         });
         // Add services to the container.
