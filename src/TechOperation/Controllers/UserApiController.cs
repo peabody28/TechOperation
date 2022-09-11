@@ -1,16 +1,20 @@
 ﻿using core;
-using Microsoft.AspNetCore.Mvc;
 using repositories.Interfaces;
 using TechOperation.Models.User;
 using TechOperation.ModelBuilder;
+using System.Web.Http;
 
 namespace TechOperation.Controllers
 {
     public class UserApiController : BaseApiController
     {
+        #region [ Dependency -> Repositories ]
+
         private IUserRepository UserRepository { get; set; }
 
         private IRoleRepository RoleRepository { get; set; }
+
+        #endregion
 
         public UserApiController(IUserRepository userRepository, IRoleRepository roleRepository)
         {

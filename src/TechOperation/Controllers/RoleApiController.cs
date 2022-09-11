@@ -1,13 +1,17 @@
 ﻿using core;
-using Microsoft.AspNetCore.Mvc;
 using repositories.Interfaces;
 using TechOperation.Models.Role;
+using System.Web.Http;
 
 namespace TechOperation.Controllers
 {
     public class RoleApiController : BaseApiController
     {
+        #region [ Dependency -> Repositories ]
+
         private IRoleRepository RoleRepository { get; set; }
+
+        #endregion
 
         public RoleApiController(IRoleRepository roleRepository)
         {
