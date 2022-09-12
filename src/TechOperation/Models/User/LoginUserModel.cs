@@ -2,7 +2,7 @@
 
 namespace TechOperation.Models.User
 {
-    public class LoginModel
+    public class LoginUserModel
     {
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }

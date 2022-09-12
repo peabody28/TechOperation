@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\core\core.csproj" />
     <ProjectReference Include="..\entities\entities.csproj" />
     <ProjectReference Include="..\repositories\repositories.csproj" />

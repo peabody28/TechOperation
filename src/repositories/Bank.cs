@@ -19,7 +19,7 @@ namespace repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connString = Configuration.GetConnectionString("Bank");
+            var connString = Configuration.GetConnectionString("tech.operations");
             optionsBuilder.UseSqlServer(connString);
         }
 

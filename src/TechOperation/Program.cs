@@ -1,6 +1,7 @@
 using core;
 using entities;
 using entities.Interfaces;
+using FluentValidation.AspNetCore;
 using repositories;
 using repositories.Interfaces;
 using repositories.Repositories;
@@ -32,6 +33,11 @@ public class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
+
+        builder.Services.AddFluentValidation(s =>
+        {
+            s.RegisterValidatorsFromAssemblyContaining<Program>();
+        });
 
         var app = builder.Build();
 
