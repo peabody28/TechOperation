@@ -58,3 +58,11 @@ GO
 
 ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Role]
 GO
+
+IF NOT EXISTS(SELECT 1 FROM sys.columns WHERE Name = N'IsConfirmed'AND Object_ID = Object_ID(N'dbo.Event'))
+BEGIN
+	ALTER TABLE [dbo].[Event] ADD [IsConfirmed] bit NOT NULL DEFAULT(0)
+END
+GO
+
+ALTER TABLE [dbo].[Event] ALTER COLUMN [Title] [varchar](255)
