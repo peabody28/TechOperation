@@ -1,32 +1,41 @@
-﻿using entities;
-using entities.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using entities.Interfaces;
+using repositories.DtoBuilders;
 using repositories.Interfaces;
 
 namespace repositories.Repositories
 {
     public class EventRepository : IEventRepository
     {
-        private Bank Bank { get; set; }
+        private PostgresBank Bank { get; set; }
 
-        public EventRepository(Bank database)
+        private EventDtoBuilder EventDtoBuilder { get; set; }
+
+        public IServiceProvider Container { get; set; }
+
+        public EventRepository(PostgresBank database, EventDtoBuilder eventDtoBuilder, IServiceProvider container)
         {
             Bank = database;
+            EventDtoBuilder = eventDtoBuilder;
+            Container = container;
         }
 
         public IEvent Object(string title)
         {
-            return Bank.Event.Include(c => c.Role).FirstOrDefault(ev => ev.Title.Equals(title));
+            var eventDtoModel = Bank.Event.FirstOrDefault(ev => ev.Title.Equals(title));
+            
+            return EventDtoBuilder.Build(eventDtoModel);
         }
 
         public IEnumerable<IEvent> Collection(string roleCode)
         {
-            return Bank.Event.Include(c => c.Role).Where(ev => roleCode != null ? ev.Role.Code.Equals(roleCode) : true).Cast<IEvent>();
+            var events = Bank.Event.Where(ev => ( roleCode != null ? ev.RoleCode.Equals(roleCode) : true) && !ev.IsConfirmed);
+            return events.Select(ev => EventDtoBuilder.Build(ev));
         }
 
         public void Update(IEvent ev)
         {
-            Bank.Event.Update(ev as EventEntity);
+            var eventDtoModel = EventDtoBuilder.Build(ev);
+            Bank.Event.Update(eventDtoModel);
             Bank.SaveChanges();
         }
     }

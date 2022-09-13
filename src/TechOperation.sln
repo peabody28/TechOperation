@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "entities", "entities\entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "repositories", "repositories\repositories.csproj", "{E48EAF3D-4C43-4171-BF91-D18DA9854C41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "operations", "operations\operations.csproj", "{96C7E3C7-2BD2-413F-B84A-70A8A21A12A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "operations", "operations\operations.csproj", "{96C7E3C7-2BD2-413F-B84A-70A8A21A12A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

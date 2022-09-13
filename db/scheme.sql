@@ -66,3 +66,10 @@ END
 GO
 
 ALTER TABLE [dbo].[Event] ALTER COLUMN [Title] [varchar](255)
+
+-- replace Evente table to remote database
+IF EXISTS (SELECT * FROM sys.tables WHERE [object_id] = object_id('Event'))
+BEGIN
+	DROP TABLE [dbo].[Event]
+END
+GO

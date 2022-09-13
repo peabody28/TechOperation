@@ -5,6 +5,7 @@ using FluentValidation.AspNetCore;
 using operations.Interfaces;
 using operations.Operations;
 using repositories;
+using repositories.DtoBuilders;
 using repositories.Interfaces;
 using repositories.Repositories;
 
@@ -19,6 +20,8 @@ public class Program
 
         builder.Services.AddScoped<Bank, Bank>();
         builder.Services.AddScoped<PostgresBank, PostgresBank>();
+
+        builder.Services.AddScoped<EventDtoBuilder, EventDtoBuilder>();
 
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IRoleRepository, RoleRepository>();

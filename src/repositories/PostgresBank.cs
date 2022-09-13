@@ -1,4 +1,5 @@
 ﻿using entities;
+using entities.Dto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -13,19 +14,20 @@ namespace repositories
             Configuration = config;
         }
 
-        public DbSet<EventEntity> Event { get; set; }
+        public DbSet<EventDtoModel> Event { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connString = Configuration.GetConnectionString("tech.operations");//"postgresRemoteDatabase");
-            optionsBuilder.UseSqlServer(connString);
+            var connString = Configuration.GetConnectionString("postgresRemoteDatabase");
+
+            optionsBuilder
+                .UseNpgsql(connString)
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<EventEntity>()
-                .HasOne(c => c.Role as RoleEntity);
         }
     }
 }
