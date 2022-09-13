@@ -21,5 +21,7 @@ namespace entities
                 Role = value as RoleEntity;
             }
         }
+
+        public bool IsConfirmed { get; set; }
     }
 }

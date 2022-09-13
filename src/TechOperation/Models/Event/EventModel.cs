@@ -9,5 +9,8 @@ namespace TechOperation.Models.Event
 
         [JsonProperty("roleCode")]
         public string RoleCode { get; set; }
+
+        [JsonProperty("isConfirmed")]
+        public bool IsConfirmed { get; set; }
     }
 }

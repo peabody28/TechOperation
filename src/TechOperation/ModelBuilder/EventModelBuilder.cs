@@ -10,7 +10,8 @@ namespace TechOperation.ModelBuilder
             return new EventModel
             {
                 Title = ev.Title,
-                RoleCode = ev.Role.Code
+                RoleCode = ev.Role.Code,
+                IsConfirmed = ev.IsConfirmed
             };
         }
     }

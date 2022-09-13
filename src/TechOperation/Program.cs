@@ -2,6 +2,8 @@ using core;
 using entities;
 using entities.Interfaces;
 using FluentValidation.AspNetCore;
+using operations.Interfaces;
+using operations.Operations;
 using repositories;
 using repositories.Interfaces;
 using repositories.Repositories;
@@ -16,10 +18,13 @@ public class Program
         builder.Services.AddControllers();
 
         builder.Services.AddScoped<Bank, Bank>();
+        builder.Services.AddScoped<PostgresBank, PostgresBank>();
 
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IRoleRepository, RoleRepository>();
         builder.Services.AddScoped<IEventRepository, EventRepository>();
+
+        builder.Services.AddScoped<IEventOperation, EventOperation>();
 
         builder.Services.AddScoped<IUser, UserEntity>();
         builder.Services.AddScoped<IRole, RoleEntity>();
