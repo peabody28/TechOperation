@@ -2,29 +2,28 @@
 using FluentValidation.Results;
 using repositories.Interfaces;
 using TechOperation.Constants;
-using TechOperation.Models.User;
+using TechOperation.Models.Report;
 
-namespace TechOperation.Validators.User
+namespace TechOperation.Validators.Report
 {
-    public class LoginUserValidator : AbstractValidator<LoginUserModel>
+    public class CreateLocationReportValidator : AbstractValidator<CreateLocationReportModel>
     {
-
         #region [ Dependency -> Repositories ]
 
         public IUserRepository UserRepository { get; set; }
 
         #endregion
 
-        public LoginUserValidator(IUserRepository userRepository)
+        public CreateLocationReportValidator(IUserRepository userRepository)
         {
             UserRepository = userRepository;
 
             RuleFor(model => model)
                 .Cascade(CascadeMode.StopOnFirstFailure)
-                .Custom(ValidateUser);
+                .Custom(ValidateTelegramId);
         }
 
-        private void ValidateUser(LoginUserModel model, ValidationContext<LoginUserModel> context)
+        private void ValidateTelegramId(CreateLocationReportModel model, ValidationContext<CreateLocationReportModel> context)
         {
             if (model.TelegramId.Equals(0))
             {

@@ -5,7 +5,6 @@ using FluentValidation.AspNetCore;
 using operations.Interfaces;
 using operations.Operations;
 using repositories;
-using repositories.DtoBuilders;
 using repositories.Interfaces;
 using repositories.Repositories;
 
@@ -19,19 +18,21 @@ public class Program
         builder.Services.AddControllers();
 
         builder.Services.AddScoped<Bank, Bank>();
-        builder.Services.AddScoped<PostgresBank, PostgresBank>();
-
-        builder.Services.AddScoped<EventDtoBuilder, EventDtoBuilder>();
 
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IRoleRepository, RoleRepository>();
         builder.Services.AddScoped<IEventRepository, EventRepository>();
+        builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+        builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
         builder.Services.AddScoped<IEventOperation, EventOperation>();
+        builder.Services.AddScoped<IReportOperation, ReportOperation>();
 
         builder.Services.AddScoped<IUser, UserEntity>();
         builder.Services.AddScoped<IRole, RoleEntity>();
         builder.Services.AddScoped<IEvent, EventEntity>();
+        builder.Services.AddScoped<ILocation, LocationEntity>();
+        builder.Services.AddScoped<IReport, ReportEntity>();
 
         builder.Services.AddMvc(opt =>
         {

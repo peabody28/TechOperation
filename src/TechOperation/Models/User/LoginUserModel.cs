@@ -4,7 +4,7 @@ namespace TechOperation.Models.User
 {
     public class LoginUserModel
     {
-        [JsonProperty("phoneNumber")]
-        public string PhoneNumber { get; set; }
+        [JsonProperty("telegramId")]
+        public int TelegramId { get; set; }
     }
 }

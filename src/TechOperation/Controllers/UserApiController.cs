@@ -23,9 +23,9 @@ namespace TechOperation.Controllers
         }
 
         [HttpGet]
-        public List<UserModel> Users()
+        public List<UserModel> Users([FromQuery] RequestUsersModel model)
         {
-            var users = UserRepository.Collection();
+            var users = UserRepository.Collection(model.RoleCode);
             return users.Select(user => UserModelBuilder.Build(user)).ToList();
         }
 
@@ -39,7 +39,7 @@ namespace TechOperation.Controllers
         [HttpPost]
         public UserModel Login(LoginUserModel model)
         {
-            var user = UserRepository.ObjectByPhone(model.PhoneNumber);
+            var user = UserRepository.Object(model.TelegramId);
             return UserModelBuilder.Build(user);
         }
 

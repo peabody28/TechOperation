@@ -9,7 +9,8 @@ namespace TechOperation.ModelBuilder
         {
             return new EventModel
             {
-                Title = ev.Title,
+                Id = ev.Id,
+                Message = ev.Message,
                 RoleCode = ev.Role.Code
             };
         }

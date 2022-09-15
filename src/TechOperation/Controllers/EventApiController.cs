@@ -38,7 +38,7 @@ namespace TechOperation.Controllers
         [HttpPost]
         public HttpResponseMessage Confirm(ConfirmEventModel model)
         {
-            var ev = EventRepository.Object(model.Title);
+            var ev = EventRepository.Object(model.Id);
 
             EventOperation.Confirm(ev);
 

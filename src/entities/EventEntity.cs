@@ -1,14 +1,20 @@
 ﻿using entities.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace entities
 {
+    [Table("event", Schema = "public")]
     public class EventEntity : IEvent
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        
+        public string Message { get; set; }
 
-        public string Title { get; set; }
-
+        [ForeignKey("role")]
+        public Guid RoleId { get; set; }
         public IRole Role { get; set; }
+
+        public bool IsConfirmed { get; set; }
 
         IRole IEvent.Role
         {
@@ -18,7 +24,5 @@ namespace entities
                 Role = value as RoleEntity;
             }
         }
-
-        public bool IsConfirmed { get; set; }
     }
 }

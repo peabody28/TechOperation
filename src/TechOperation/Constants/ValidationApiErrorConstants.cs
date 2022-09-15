@@ -12,6 +12,8 @@
         internal const string TELEGRAM_ID_REQUIRED = "TELEGRAM_ID_REQUIRED";
         internal const string NAME_REQUIRED = "NAME_REQUIRED";
 
-        internal const string EVENT_WITH_SPECIFIED_TITLE_NOT_FOUND = nameof(EVENT_WITH_SPECIFIED_TITLE_NOT_FOUND);
+        internal const string EVENT_NOT_FOUND = nameof(EVENT_NOT_FOUND);
+
+        internal const string EVENT_ALREADY_CONFIRMED = nameof(EVENT_ALREADY_CONFIRMED);
     }
 }

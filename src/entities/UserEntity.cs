@@ -1,10 +1,9 @@
 ﻿using entities.Interfaces;
-using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace entities
 {
+    [Table("user", Schema = "public")]
     public class UserEntity : IUser
     {
         public Guid Id { get; set; }
@@ -13,8 +12,9 @@ namespace entities
 
         public string Name { get; set; }
 
-        [ForeignKey("Role")]
-        public Guid RoleFk { get; set; }
+        [ForeignKey("role")]
+        public Guid RoleId { get; set; }
+
         public IRole Role { get; set; }
 
         public string PhoneNumber { get; set; }

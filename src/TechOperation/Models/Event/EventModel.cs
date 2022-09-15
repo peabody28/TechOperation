@@ -4,8 +4,11 @@ namespace TechOperation.Models.Event
 {
     public class EventModel
     {
-        [JsonProperty("title")]
-        public string Title { get; set; }
+        [JsonProperty("id")]
+        public Guid Id { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
 
         [JsonProperty("roleCode")]
         public string RoleCode { get; set; }

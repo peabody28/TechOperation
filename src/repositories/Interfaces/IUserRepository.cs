@@ -8,8 +8,10 @@ namespace repositories.Interfaces
 
         IUser Object(string name);
 
+        IUser Object(int telegramId);
+
         IUser ObjectByPhone(string phoneNumber);
 
-        IEnumerable<IUser> Collection();
+        IEnumerable<IUser> Collection(string roleCode = null);
     }
 }

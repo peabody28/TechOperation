@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace entities.Interfaces
+﻿namespace entities.Interfaces
 {
     public interface IRole
     {

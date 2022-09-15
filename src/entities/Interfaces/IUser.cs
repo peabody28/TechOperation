@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace entities.Interfaces
+﻿namespace entities.Interfaces
 {
     public interface IUser
     {
@@ -10,7 +8,7 @@ namespace entities.Interfaces
 
         string Name { get; set; }
 
-        Guid RoleFk { get; set; }
+        Guid RoleId { get; set; }
         IRole Role { get; set; }
 
         string PhoneNumber { get; set; }

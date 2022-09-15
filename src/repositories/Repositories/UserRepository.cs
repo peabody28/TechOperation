@@ -22,13 +22,14 @@ namespace repositories.Repositories
         {
             var entity = Container.GetRequiredService<IUser>();
             entity.Id = Guid.NewGuid();
-            entity.Role = role;
+            entity.RoleId = role.Id;
             entity.TelegramId = telegramId;
             entity.Name = name;
             entity.PhoneNumber = phoneNumber;
 
             var user = Bank.User.Add(entity as UserEntity);
             Bank.SaveChanges();
+            user.Entity.Role = role;
             return user.Entity;
         }
 
@@ -38,15 +39,21 @@ namespace repositories.Repositories
             return user;
         }
 
+        public IUser Object(int telegramId)
+        {
+            var user = Bank.User.Include(c => c.Role).FirstOrDefault(user => user.TelegramId.Equals(telegramId));
+            return user;
+        }
+
         public IUser ObjectByPhone(string phoneNumber)
         {
             var user = Bank.User.Include(c => c.Role).FirstOrDefault(user => user.PhoneNumber.Equals(phoneNumber));
             return user;
         }
 
-        public IEnumerable<IUser> Collection()
+        public IEnumerable<IUser> Collection(string roleCode = null)
         {
-            return Bank.User.Include(c => c.Role).Cast<IUser>();
+            return Bank.User.Include(c => c.Role).Where(user => roleCode != null ? user.Role.Code.Equals(roleCode) : true).Cast<IUser>();
         }
     }
 }

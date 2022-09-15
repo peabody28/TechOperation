@@ -2,11 +2,13 @@
 {
     public interface IEvent
     {
-        int Id { get; set; }
+        Guid Id { get; set; }
 
-        string Title { get; set; }
+        string Message { get; set; }
 
         IRole Role { get; set; }
+
+        Guid RoleId { get; set; }
 
         bool IsConfirmed { get; set; }
     }

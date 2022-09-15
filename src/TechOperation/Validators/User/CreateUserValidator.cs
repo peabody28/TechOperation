@@ -23,6 +23,7 @@ namespace TechOperation.Validators.User
             RoleRepository = roleRepository;
 
             RuleFor(model => model)
+                .Cascade(CascadeMode.StopOnFirstFailure)
                 .Custom(ValidateRole)
                 .Custom(ValidateTelegramId)
                 .Custom(ValidatePhoneNumber)
@@ -32,7 +33,14 @@ namespace TechOperation.Validators.User
         private void ValidateTelegramId(CreateUserModel model, ValidationContext<CreateUserModel> context)
         {
             if (model.TelegramId.Equals(0))
+            {
                 context.AddFailure(new ValidationFailure(nameof(model.TelegramId), ValidationApiErrorConstants.TELEGRAM_ID_REQUIRED));
+                return;
+            }
+
+            var user = UserRepository.Object(model.TelegramId);
+            if (user != null)
+                context.AddFailure(new ValidationFailure(nameof(model.TelegramId), ValidationApiErrorConstants.USER_ALREADY_EXISTS));
         }
 
         private void ValidatePhoneNumber(CreateUserModel model, ValidationContext<CreateUserModel> context)

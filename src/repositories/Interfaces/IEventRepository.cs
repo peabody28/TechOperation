@@ -4,7 +4,7 @@ namespace repositories.Interfaces
 {
     public interface IEventRepository
     {
-        IEvent Object(string title);
+        IEvent Object(Guid id);
 
         IEnumerable<IEvent> Collection(string roleCode);
 

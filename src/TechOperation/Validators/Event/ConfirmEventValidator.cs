@@ -19,14 +19,23 @@ namespace TechOperation.Validators.Event
             EventRepository = eventRepository;
 
             RuleFor(model => model)
-                .Custom(ValidateEvent);
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .Custom(ValidateEvent)
+                .Custom(ValidateIsConfirmed);
         }
 
         private void ValidateEvent(ConfirmEventModel model, ValidationContext<ConfirmEventModel> context)
         {
-            var ev = EventRepository.Object(model.Title);
+            var ev = EventRepository.Object(model.Id);
             if (ev == null)
-                context.AddFailure(new ValidationFailure(nameof(model.Title), ValidationApiErrorConstants.EVENT_WITH_SPECIFIED_TITLE_NOT_FOUND));
+                context.AddFailure(new ValidationFailure(nameof(model.Id), ValidationApiErrorConstants.EVENT_NOT_FOUND));
+        }
+
+        private void ValidateIsConfirmed(ConfirmEventModel model, ValidationContext<ConfirmEventModel> context)
+        {
+            var ev = EventRepository.Object(model.Id);
+            if (ev.IsConfirmed)
+                context.AddFailure(new ValidationFailure(nameof(model.Id), ValidationApiErrorConstants.EVENT_ALREADY_CONFIRMED));
         }
     }
 }
