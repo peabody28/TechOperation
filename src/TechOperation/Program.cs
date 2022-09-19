@@ -2,6 +2,7 @@ using core;
 using entities;
 using entities.Interfaces;
 using FluentValidation.AspNetCore;
+using helpers;
 using operations.Interfaces;
 using operations.Operations;
 using repositories;
@@ -18,6 +19,7 @@ public class Program
         builder.Services.AddControllers();
 
         builder.Services.AddScoped<Bank, Bank>();
+        builder.Services.AddScoped<UploadFileHelper, UploadFileHelper>();
 
         builder.Services.AddScoped<IUserRepository, UserRepository>();
         builder.Services.AddScoped<IRoleRepository, RoleRepository>();

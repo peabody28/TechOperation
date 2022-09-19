@@ -24,12 +24,15 @@ namespace operations.Operations
             Container = container;
         }
 
-        public IReport CreateLocationReport(IUser user, float latitude, float longitude)
+        public IReport Create(IUser user, string text, string photoPath, float? latitude, float? longitude)
         {
-            return Container.InTransaction(() => 
+            return Container.InTransaction(() =>
             {
-                var location = LocationRepository.Create(latitude, longitude);
-                return ReportRepository.Create(user, location);
+                ILocation location = null;
+                if (latitude.HasValue && longitude.HasValue)
+                    location = LocationRepository.Create(latitude.Value, longitude.Value);
+
+                return ReportRepository.Create(user, location, text, photoPath);
             });
         }
     }

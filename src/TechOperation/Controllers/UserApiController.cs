@@ -44,6 +44,13 @@ namespace TechOperation.Controllers
         }
 
         [HttpPost]
+        public UserModel LoginByPhone(LoginUserByPhoneModel model)
+        {
+            var user = UserRepository.ObjectByPhone(model.PhoneNumber);
+            return UserModelBuilder.Build(user);
+        }
+
+        [HttpPost]
         public UserModel Create(CreateUserModel model)
         {
             var role = RoleRepository.Object(model.RoleCode);

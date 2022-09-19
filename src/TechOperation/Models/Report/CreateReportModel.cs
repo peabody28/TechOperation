@@ -2,15 +2,18 @@
 
 namespace TechOperation.Models.Report
 {
-    public class CreateLocationReportModel
+    public class CreateReportModel
     {
         [JsonProperty("telegramId")]
         public int TelegramId { get; set; }
 
         [JsonProperty("latitude")]
-        public float Latitude { get; set; }
+        public float? Latitude { get; set; }
 
         [JsonProperty("longitude")]
-        public float Longitude { get; set; }
+        public float? Longitude { get; set; }
+
+        [JsonProperty("text")]
+        public string Text { get; set; }
     }
 }

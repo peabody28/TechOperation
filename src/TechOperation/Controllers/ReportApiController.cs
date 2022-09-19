@@ -1,5 +1,5 @@
 ﻿using core;
-using Microsoft.AspNetCore.Http;
+using helpers;
 using Microsoft.AspNetCore.Mvc;
 using operations.Interfaces;
 using repositories.Interfaces;
@@ -21,21 +21,33 @@ namespace TechOperation.Controllers
 
         #endregion
 
-        public ReportApiController(IUserRepository userRepository, IReportOperation reportOperation)
+        public IConfiguration Configuration { get; set; }   
+
+        public UploadFileHelper UploadFileHelper { get; set; }
+
+        public ReportApiController(IUserRepository userRepository, IReportOperation reportOperation, IConfiguration configuration, UploadFileHelper uploadFileHelper)    
         {
             UserRepository = userRepository;
             ReportOperation = reportOperation;
+            Configuration = configuration;
+            UploadFileHelper = uploadFileHelper;
         }
 
         [HttpPost]
-        public HttpResponseMessage CreateLocationReport(CreateLocationReportModel model)
+        public HttpResponseMessage Create([FromQuery] CreateReportModel model)
         {
             var user = UserRepository.Object(model.TelegramId);
 
-            var report = ReportOperation.CreateLocationReport(user, model.Latitude, model.Longitude);
+            string path = null;
+            if (Request.HasFormContentType && !HttpContext.Request.Form.Files.Count.Equals(0))
+            {
+                var folderPath = string.Format(Configuration.GetSection("Download:Image:Directory").Value, model.TelegramId.ToString());
+                path = UploadFileHelper.Upload(HttpContext.Request.Form.Files.First(), folderPath);
+            }
+
+            var report = ReportOperation.Create(user, model.Text, path, model.Latitude, model.Longitude);
 
             return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
         }
-
     }
 }

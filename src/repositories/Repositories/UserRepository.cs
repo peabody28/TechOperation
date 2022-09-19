@@ -25,7 +25,7 @@ namespace repositories.Repositories
             entity.RoleId = role.Id;
             entity.TelegramId = telegramId;
             entity.Name = name;
-            entity.PhoneNumber = phoneNumber;
+            entity.PhoneNumber = phoneNumber.Replace("+", string.Empty);
 
             var user = Bank.User.Add(entity as UserEntity);
             Bank.SaveChanges();

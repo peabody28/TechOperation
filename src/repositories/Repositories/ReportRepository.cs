@@ -17,11 +17,13 @@ namespace repositories.Repositories
             Container = container;
         }
 
-        public IReport Create(IUser user, ILocation location)
+        public IReport Create(IUser user, ILocation location, string text, string photoPath)
         {
             var entity = Container.GetService<IReport>();
             entity.Id = Guid.NewGuid();
-            entity.LocationId = location.Id;
+            entity.LocationId = location?.Id;
+            entity.Text = text;
+            entity.PhotoPath = photoPath;
             entity.UserId = user.Id;
 
             var report = Bank.Report.Add(entity as ReportEntity);

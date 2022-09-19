@@ -8,7 +8,7 @@
 
         string PhotoPath { get; set; }
 
-        Guid LocationId { get; set; }
+        Guid? LocationId { get; set; }
 
         ILocation Location { get; set; }
 

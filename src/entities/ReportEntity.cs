@@ -13,7 +13,7 @@ namespace entities
         public string PhotoPath { get; set; }
 
         [ForeignKey("location")]
-        public Guid LocationId { get; set; }
+        public Guid? LocationId { get; set; }
 
         public ILocation Location { get; set; }
 

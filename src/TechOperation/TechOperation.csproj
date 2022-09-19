@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\core\core.csproj" />
     <ProjectReference Include="..\entities\entities.csproj" />
+    <ProjectReference Include="..\helpers\helpers.csproj" />
     <ProjectReference Include="..\operations\operations.csproj" />
     <ProjectReference Include="..\repositories\repositories.csproj" />
   </ItemGroup>

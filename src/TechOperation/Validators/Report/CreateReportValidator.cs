@@ -6,7 +6,7 @@ using TechOperation.Models.Report;
 
 namespace TechOperation.Validators.Report
 {
-    public class CreateLocationReportValidator : AbstractValidator<CreateLocationReportModel>
+    public class CreateReportValidator : AbstractValidator<CreateReportModel>
     {
         #region [ Dependency -> Repositories ]
 
@@ -14,7 +14,7 @@ namespace TechOperation.Validators.Report
 
         #endregion
 
-        public CreateLocationReportValidator(IUserRepository userRepository)
+        public CreateReportValidator(IUserRepository userRepository)
         {
             UserRepository = userRepository;
 
@@ -23,7 +23,7 @@ namespace TechOperation.Validators.Report
                 .Custom(ValidateTelegramId);
         }
 
-        private void ValidateTelegramId(CreateLocationReportModel model, ValidationContext<CreateLocationReportModel> context)
+        private void ValidateTelegramId(CreateReportModel model, ValidationContext<CreateReportModel> context)
         {
             if (model.TelegramId.Equals(0))
             {

@@ -4,6 +4,6 @@ namespace repositories.Interfaces
 {
     public interface IReportRepository
     {
-        IReport Create(IUser user, ILocation location);
+        IReport Create(IUser user, ILocation location, string text, string photoPath);
     }
 }
